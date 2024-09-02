@@ -1,0 +1,16 @@
+.container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 20px;
+   width: 20%;
+   gap: 12px
+}
+
+.select {
+   border: 1px solid #333;
+   border-radius: 4px;
+   padding: 0.5rem 1rem;
+   width: 70%;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
