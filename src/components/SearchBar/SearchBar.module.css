@@ -1,7 +1,7 @@
 .container {
    display: flex;
-   margin-top: 20px;
-   width: 80%;
+   max-width: 80%;
+   min-width: 50%;
 }
 
 .input {
@@ -10,4 +10,5 @@
    padding: 0.5rem 1rem;
    width: 70%;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   width: 100%;
 }
