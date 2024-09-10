@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DetailPage.module.css";
+import axios from "axios";
 
-function DetailPage({ cars, setCars }) {
+function DetailPage() {
    const { id_car } = useParams();
    const navigate = useNavigate();
 
-   const car = cars.find((car) => car.id === Number(id_car));
-
    const [showForm, setShowForm] = useState(false);
-   const [form, setForm] = useState({
-      title: car.title,
-      start_production: car.start_production,
-      class: car.class,
-      image: car.image,
-      id: car.id,
-   });
+   const [car, setCar] = useState({});
+   const [form, setForm] = useState({});
+
+   useEffect(() => {
+      async function fetchData() {
+         try {
+            const response = await axios.get(
+               `https://basic-server-express-production.up.railway.app/cars/${id_car}`
+            );
+            let car = response.data;
+            setCar(car);
+            setForm({
+               title: car.title,
+               start_production: car.start_production,
+               class: car.class,
+               image: car.image,
+               _id: car._id,
+            });
+         } catch (error) {
+            console.error("Error fetching data", error);
+         }
+      }
+
+      fetchData();
+   }, []);
 
    function handleShowForm() {
       setShowForm(!showForm);
@@ -28,22 +45,30 @@ function DetailPage({ cars, setCars }) {
       });
    }
 
-   function handleSubmit(e) {
+   async function handleSubmit(e) {
       e.preventDefault();
-
-      const index = cars.findIndex((car) => car.id === Number(id_car));
-      const newCars = [...cars];
-      newCars[index] = form;
-      setCars(newCars);
-      setShowForm(false);
+      try {
+         const response = await axios.put(
+            `https://basic-server-express-production.up.railway.app/cars/update/${id_car}`,
+            { ...form }
+         );
+         setShowForm(false);
+         setCar(response.data);
+      } catch (error) {
+         console.error("Error updating car", error);
+      }
    }
 
-   function handleDelete() {
-      const index = cars.findIndex((car) => car.id === Number(id_car));
-      const newCars = [...cars];
-      newCars.splice(index, 1);
-      setCars(newCars);
-      navigate("/");
+   async function handleDelete(e) {
+      e.preventDefault();
+      try {
+         const response = await axios.delete(
+            `https://basic-server-express-production.up.railway.app/cars/delete/${id_car}`
+         );
+         navigate("/");
+      } catch (error) {
+         console.error("Error deleting car", error);
+      }
    }
 
    return (
@@ -57,7 +82,7 @@ function DetailPage({ cars, setCars }) {
                <h2>{car.title}</h2>
                <p>Start production: {car.start_production}</p>
                <p>Class: {car.class}</p>
-               <p className={styles.id}>ID {car.id}</p>
+               <p className={styles.id}>ID: {car._id}</p>
             </div>
          </div>
          <div className={styles.detailButtons}>
@@ -66,7 +91,7 @@ function DetailPage({ cars, setCars }) {
 
          {showForm && (
             <div className={styles.formContainer}>
-               <form onSubmit={handleSubmit}>
+               <form>
                   <div className={styles.input}>
                      <label className={styles.label}>Title</label>
                      <input
@@ -111,7 +136,7 @@ function DetailPage({ cars, setCars }) {
                      <button onClick={handleDelete} className={styles.delete}>
                         Delete this car
                      </button>
-                     <button type="submit" className={styles.save}>
+                     <button onClick={handleSubmit} className={styles.save}>
                         Save
                      </button>
                   </div>

@@ -1,21 +1,33 @@
 import styles from "./YearFilter.module.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function YearFilter({ cars, year, setYear }) {
-   //get all years
-   let years = cars.map((car) => car.start_production);
+function YearFilter({ year, setYear }) {
+   const [years, setYears] = useState([]);
 
-   //remove duplicates
-   years = [...new Set(years)];
+   useEffect(() => {
+      async function fetchData() {
+         try {
+            const response = await axios.get(
+               "https://basic-server-express-production.up.railway.app/cars/all"
+            );
+            let years = response.data.map((car) => car.start_production);
+            years = [...new Set(years)];
+            years.sort();
+            setYears(years);
+         } catch (error) {
+            console.error("Error fetching data", error);
+         }
+      }
 
-   //sort
-   years.sort();
+      fetchData();
+   }, []);
 
    function handleChange(e) {
       if (e.target.value === "all") {
          setYear(null);
          return;
       }
-
       setYear(e.target.value);
    }
 

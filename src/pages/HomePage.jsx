@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import YearFilter from "../components/YearFilter/YearFilter";
 import Cards from "../components/Cards/Cards";
 
-function HomePage({ cars }) {
+function HomePage() {
    const [search, setSearch] = useState("");
    const [year, setYear] = useState(null);
 
@@ -16,10 +16,10 @@ function HomePage({ cars }) {
       <div className={styles.container}>
          <div className={styles.inputs}>
             <SearchBar search={search} handleChange={handleChange} />
-            <YearFilter cars={cars} year={year} setYear={setYear} />
+            <YearFilter year={year} setYear={setYear} />
          </div>
 
-         <Cards cars={cars} search={search} year={year} />
+         <Cards search={search} year={year} />
       </div>
    );
 }
