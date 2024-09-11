@@ -1,0 +1,132 @@
+.container {
+   max-width: 1000px;
+   margin: 2rem auto;
+   padding: 1.5rem;
+   background-color: #f9f9f9;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   display: flex;
+}
+
+.image {
+   width: 50%;
+   height: auto;
+   border-radius: 10px;
+   overflow: hidden;
+}
+
+img {
+   width: 100%;
+   border-radius: 10px;
+}
+
+.content {
+   width: 50%;
+   padding: 0 1.5rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.id {
+   font-size: 1.2rem;
+   color: #727272;
+   background-color: #d6d4d4;
+   padding: 0.3rem 0.5rem;
+   border-radius: 5px;
+   margin-bottom: 1rem;
+   display: inline-block;
+}
+
+.detailButtons {
+   display: flex;
+   justify-content: center;
+   margin-top: 1.5rem;
+}
+
+.detailButtons button {
+   padding: 0.7rem 1.5rem;
+   font-size: 1rem;
+   color: #fff;
+   background-color: #333;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.detailButtons button:hover {
+   background-color: #555;
+}
+
+.formContainer {
+   margin-top: 2rem;
+   background-color: #fff;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   max-width: 1000px;
+   margin: 2rem auto;
+   padding: 1.5rem;
+}
+
+.formContainer form {
+   display: flex;
+   flex-direction: column;
+}
+
+.input {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.label {
+   font-size: 0.9rem;
+   color: #333;
+   margin-bottom: 0.5rem;
+   width: 100%;
+   text-align: left;
+}
+
+.input input {
+   padding: 0.7rem;
+   font-size: 1rem;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   margin-bottom: 1rem;
+}
+
+.save {
+   padding: 0.7rem 1.5rem;
+   font-size: 1rem;
+   color: #fff;
+   background-color: #28a745;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.save:hover {
+   background-color: #218838;
+}
+
+.buttons {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.delete {
+   padding: 0.7rem 1.5rem;
+   font-size: 1rem;
+   color: #fff;
+   background-color: #dc3545;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.delete:hover {
+   background-color: #c82333;
+}
